@@ -1,12 +1,13 @@
-import './App.css'
+import './App.css';
+import Dashboard from './components/Dashboard';
+import { UserProvider } from './context/UserContext';
 
 function App() {
-
   return (
-    <>
-      Hello
-    </>
-  )
+    <UserProvider>
+      <Dashboard />
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
