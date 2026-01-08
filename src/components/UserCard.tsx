@@ -49,7 +49,7 @@ const UserCard = ({ user, onClick }: UserCardProps) => {
                 </div>
                 <div className="footer-item">
                     <MdLanguage className="icon" />
-                    <a href={user.website} target="_blank" rel="noopener noreferrer" className="footer-text">{user.website}</a>
+                    <a href={`https://${user.website}`} target="_blank" rel="noopener noreferrer" className="footer-text">{user.website}</a>
                 </div>
             </div>
         </div>

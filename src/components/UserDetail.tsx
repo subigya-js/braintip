@@ -46,7 +46,7 @@ const UserDetail = ({ user, onClose }: UserDetailProps) => {
                         </div>
                         <div className="detail-field">
                             <label>Website</label>
-                            <a href={user.website} target="_blank" rel="noopener noreferrer">{user.website}</a>
+                            <a href={`https://${user.website}`} target="_blank" rel="noopener noreferrer">{user.website}</a>
                         </div>
                     </div>
                 </div>
