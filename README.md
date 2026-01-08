@@ -52,49 +52,12 @@ Context API was preferred over other state management tools because:
 - Introducing libraries like Redux or Zustand would add unnecessary boilerplate for the given scope
 - Context API is built into React, making the solution lightweight and easy to reason about
 
-This approach keeps the codebase clean while remaining scalable for the current requirements.
+This approach keeps the codebase clean while remaining scalable for the current requirements. 
 
 ### Architecture Benefits:
 
 1. **Service Layer**: Dedicated `userService` handles all API calls - single source of truth for data fetching
 2. **Context API**: Manages global state (users, loading, error) and provides it to all components
-
-## Component Structure
-
-The application follows a clean, layered architecture:
-
-```
-src/
-├── services/
-│   └── userService.ts        # API service layer
-├── context/
-│   └── UserContext.tsx       # Global state management
-├── components/
-│   ├── Dashboard.tsx         # Main container component
-│   ├── UserCard.tsx          # Reusable user card (list view)
-│   └── UserDetail.tsx        # User detail modal (detail view)
-├── App.tsx                   # Root component with provider
-└── App.css                   # Responsive styles
-```
-
-### Component Breakdown:
-
-- **`userService.ts`**: Handles all API calls. Separates business logic from UI components, making it easy to test and modify API endpoints.
-
-- **`UserContext.tsx`**: Provides global state using Context API. Fetches data on mount via the service layer and shares it with all child components.
-
-- **`Dashboard.tsx`**: Main container that consumes context data and manages local UI state (selected user). Renders the list view and conditionally shows the detail view.
-
-- **`UserCard.tsx`**: Reusable presentational component. Receives user data as props and displays it in a card format. Completely independent and testable.
-
-- **`UserDetail.tsx`**: Modal component for detailed user view. Receives user data and close handler as props. Implements click-outside-to-close functionality.
-
-### Design Decisions:
-
-1. **Separation of Concerns**: Service layer, state management, and UI are clearly separated
-2. **Reusable Components**: `UserCard` and `UserDetail` are pure presentational components
-3. **Type Safety**: TypeScript interfaces ensure data consistency across the app
-4. **Responsive Design**: Mobile-first CSS with breakpoints at 768px and 480px
 
 ## Optimization & Refactor Decision
 
@@ -107,8 +70,7 @@ src/
 1. **Single Responsibility**: The service handles only API calls, Context handles only state, components handle only UI
 2. **Testability**: Easy to mock `userService` in tests without touching Context or components
 3. **Maintainability**: If the API changes or we switch to a different backend, we only update one file
-4. **Scalability**: Adding new endpoints (e.g., `fetchUserPosts`, `updateUser`) follows the same pattern
-5. **Performance**: Centralizes API logic, preventing duplicate fetch calls
+4. **Performance**: Centralizes API logic, preventing duplicate fetch calls
 
 **Example**:
 
@@ -122,7 +84,8 @@ useEffect(() => {
 
 // After: Using service layer
 useEffect(() => {
-  userService.fetchUsers().then(setUsers);
+  const data = await userService.fetchUsers();
+  setUsers(data);
 }, []);
 ```
 
