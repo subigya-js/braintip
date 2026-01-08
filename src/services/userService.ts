@@ -1,6 +1,5 @@
 import type { User } from '../context/UserContext';
-
-const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
+import { API_BASE_URL } from '../utils/constants';
 
 export const userService = {
     async fetchUsers(): Promise<User[]> {
